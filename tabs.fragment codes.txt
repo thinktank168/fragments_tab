@@ -1,0 +1,51 @@
+Step 1: 
+Add dependencies to Gradle build.
+
+    compile 'com.android.support:design:24.0.0-alpha1'
+
+
+Step 2: - Add a java class SimpleFragmentPagerAdapter extends 
+FragmentPagerAdapter
+
+
+
+    private String tabTitles[] = new String[]{"HomePage", "News", "Announcement"};
+
+    public SimpleFragmentPagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
+
+    @Override
+    public int getCount() {
+        return 3;
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+        if (position == 0) {
+            return new MyHomeFragment();
+        } else if (position == 1) {
+            return new MyNewsFragment();
+        } else if (position == 2) {
+            return new MyFacebkFragment();
+        }
+        return null;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabTitles[position];
+    }
+
+
+
+Step 3 :
+Add the following code to MainActivity.java.
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
